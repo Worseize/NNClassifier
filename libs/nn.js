@@ -7,16 +7,10 @@ class ActivationFunction{
   }
 }
 
-let sigmoid = new ActivationFunction(
+let logistic = new ActivationFunction(
   x => 1 / (1 + Math.exp(-x)),
-  y => y * (1- y)
+  y => y * (1 - y)
 );
-
-let tanh = new ActivationFunction(
-  x => Math.tanh(x),
-  y => 1-(y*y)
-);
-
 
 class NeuralNetwork {
   constructor(input_nodes, hidden_nodes, output_nodes) {
@@ -34,9 +28,7 @@ class NeuralNetwork {
     this.bias_h.randomize();
     this.bias_o.randomize();
     this.setLearningRate();
-
     this.setActivationFunction();
-
   }
 
   predict(input_array) {
@@ -57,11 +49,11 @@ class NeuralNetwork {
     return output.toArray();
   }
 
-  setLearningRate(learning_rate = 0.1) {
+  setLearningRate(learning_rate = 1) {
     this.learning_rate = learning_rate;
   }
 
-  setActivationFunction(func = sigmoid) {
+  setActivationFunction(func = logistic) {
     this.activation_function = func;
   }
 
@@ -84,7 +76,6 @@ class NeuralNetwork {
     // Calculate the error
     // ERROR = TARGETS - OUTPUTS
     let output_errors = Matrix.subtract(targets, outputs);
-
     // let gradient = outputs * (1 - outputs);
     // Calculate gradient
     let gradients = Matrix.map(outputs, this.activation_function.dfunc);

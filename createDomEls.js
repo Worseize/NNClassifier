@@ -9,9 +9,7 @@ function createDomElements(){
   	br1.addClass('page1Brs');
   	br1.style('display','none');
 	//========================================= Page 1 ===========================================
-	lrSlider = createSlider(0.01, 0.5, 0.25, 0.01);
-	lrSlider.addClass('page1Show');
-	lrSlider.style('display','none');
+
 	//======================================== Page 2 ============================================
 
 	//========================================
@@ -32,7 +30,7 @@ function page1DataShowEvent(){
 		currentDomLines += page1DomLines;
 		resizeCanvas(innerWidth - 6, innerHeight - 38 - currentDomLines * 28);
 		//redraw page
-		nn = new NeuralNetwork(2, trainingData.length, 1);
+		nn = new NeuralNetwork(3, trainingData.length, 1);
 		auto = true;
 	}else{
 		//Hide Page1 elements
@@ -48,6 +46,6 @@ function page1DataShowEvent(){
 		resizeCanvas(innerWidth - 6, innerHeight - 38 - currentDomLines * 28);
 		//redraw page
 		auto = false;
-		iterations = 0;
+		iterations = 100;
 	}
 }
